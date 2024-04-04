@@ -1,0 +1,44 @@
+.form {
+    @apply fixed right-64 top-3 w-80  rounded-lg bg-teal-700 z-50 py-6 px-6 ;
+}
+
+.form__content {
+    @apply flex flex-col justify-between gap-4 ;
+    .form__header {
+        @apply flex flex-row gap-16 ;
+        .form__title {
+                    @apply ml-24;
+
+        }
+    //     button {
+    //     @apply ;
+    // }
+}
+}
+.form__title {
+    @apply font-normal text-sm text-slate-400 text-center;
+}
+
+// .form {
+//     @apply flex flex-col gap-6 w-full mt-6 ;
+// }
+.form__input {
+    @apply flex flex-col gap-4;
+    input {
+        @apply w-full opacity-60 rounded-lg outline-none text-gray-900 indent-5 order-1 py-3 px-6;
+    }
+}
+
+.form__textarea {
+    @apply flex flex-col gap-4;
+    textarea {
+        @apply w-full opacity-60 rounded-lg outline-none text-gray-900 indent-5 order-1 py-3 px-3 box-border resize-y;
+    }
+}
+
+.form__file {
+    @apply flex flex-col gap-4;
+    input {
+        @apply w-full opacity-60 rounded-lg outline-none text-gray-900 indent-5 order-1 py-3 px-1 text-sm;
+    }
+}

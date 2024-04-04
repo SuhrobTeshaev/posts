@@ -1,0 +1,29 @@
+.card {
+    @apply w-11/12 h-28  bg-neutral-400 mx-auto  mt-4 p-4 rounded-xl ;
+
+    .card__content {
+        @apply mx-4  flex flex-row justify-between ;
+    }
+}
+
+.card__image {
+    @apply border-red-100 w-20 h-20 rounded-xl;
+    img {
+        @apply w-full block h-full;
+    }
+}
+
+.card__info {
+    @apply flex flex-col gap-4 -mx-40 w-2/3 text-zinc-800;
+
+    .card__info__title {
+        @apply text-3xl font-bold ;
+    }
+    .card__info__description {
+        @apply text-lg font-normal whitespace-nowrap overflow-hidden overflow-ellipsis;
+    }
+}
+
+.card__actions {
+    @apply flex flex-col gap-6 mx-4 my-2;
+}

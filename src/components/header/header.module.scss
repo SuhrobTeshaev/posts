@@ -1,0 +1,27 @@
+.header {
+
+    @apply  sm:md:xl:lg:2xl:w-full px-4 py-6 mx-auto  text-white bg-neutral-600 ;
+
+    .header__content {
+        @apply flex justify-between row-span-1 gap-40 mx-3 my-auto ;
+
+        .header__logo {
+            @apply my-auto;
+        }
+    }
+
+}
+
+.header__nav {
+    
+    .nav__list {
+        @apply flex row-auto gap-20;
+
+       
+    }
+}
+
+.header__login {
+    @apply cursor-pointer ;
+}
+

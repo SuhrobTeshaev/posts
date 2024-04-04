@@ -1,0 +1,24 @@
+.footer {
+
+    @apply relative  w-full px-4 py-6 mx-auto bottom-0  text-white bg-neutral-600 ;
+
+    .footer__content {
+        @apply flex justify-between row-span-1 gap-40 mx-3 my-auto ;
+
+        .footer__logo {
+            @apply my-auto;
+        }
+    }
+                
+}
+
+.footer__nav {
+    
+    .nav__list {
+        @apply flex row-auto justify-center gap-20;
+    }
+}
+
+.social {
+    @apply flex flex-row justify-between gap-5;
+}

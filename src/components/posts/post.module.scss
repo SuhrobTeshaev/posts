@@ -1,0 +1,26 @@
+.main {
+    @apply sm:md:xl:lg:2xl:w-full flex h-screen flex-col py-4 px-3 overflow-y-scroll;
+
+    .main__header {
+        @apply flex flex-row justify-between ;
+
+        span {
+            @apply mr-20;
+        }
+    }
+    .main__search {
+        @apply  mx-60 flex  flex-row py-4 gap-4 cursor-pointer;
+
+        input {
+            @apply w-96 h-10 rounded-2xl opacity-60 outline-none text-gray-900 indent-5 order-1;
+        }
+        span {
+            @apply w-12 my-3 -mx-12 bg-opacity-100 order-2 ;
+        }
+
+        
+
+    }
+}
+
+

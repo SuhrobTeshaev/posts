@@ -1,0 +1,42 @@
+.card {
+    @apply w-full h-auto fixed top-0 left-0 flex justify-center align-middle z-50 ;
+}
+
+.card__container {
+    @apply   w-80    h-auto my-4 py-4 px-4  bg-neutral-200   rounded-lg ;
+
+    .card__content {
+        @apply  mr-4 flex flex-col gap-1  ;
+
+        .card__image {
+            @apply w-72 h-72 rounded-lg border ;
+            img {
+                @apply w-full h-full;
+            }
+        }
+    }
+}
+
+.card__info {
+    @apply overflow-hidden flex flex-col gap-6 ;
+
+    .card__info__title {
+            @apply overflow-hidden text-2xl text-gray-800 ;
+
+    }
+    .card__info__description {
+    @apply overflow-hidden h-40 w-72 text-xs font-thin text-gray-700;
+
+    }
+
+}
+
+.card__actions {
+    @apply  flex flex-row justify-between ;
+
+    button {
+        @apply w-32  justify-between h-10  flex flex-row  bg-teal-600  rounded-lg py-3 px-10 box-border hover:bg-orange-900;
+
+       
+    }
+}
