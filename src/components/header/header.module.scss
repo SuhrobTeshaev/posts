@@ -1,9 +1,9 @@
 .header {
 
-    @apply  sm:md:xl:lg:2xl:w-full px-4 py-6 mx-auto  text-white bg-neutral-600 ;
+    @apply w-full px-4 py-6  text-white bg-neutral-800 ;
 
     .header__content {
-        @apply flex justify-between row-span-1 gap-40 mx-3 my-auto ;
+        @apply flex justify-between row-span-1 gap-40 mx-3 my-auto  ;
 
         .header__logo {
             @apply my-auto;

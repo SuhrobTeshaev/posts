@@ -1,4 +1,4 @@
-import { useCallback,  useRef, useState } from "react";
+import { memo, useCallback, useRef, useState } from "react";
 import classes from "./postCard.module.scss";
 
 import EditForm from "../postForm/updateForm";
@@ -10,122 +10,111 @@ interface Props {
   name: string;
   description: string;
   image: string;
-  onCardClick:(id:number)=>void;
+  onCardClick: (id: number) => void;
+  isSelected: boolean;
+  onClose: () => void;
   isActive:boolean;
 }
 
-const Card = ({ id, name, description, image, onCardClick,isActive }: Props) => {
-  const [showEditForm, setShowEditForm] = useState(false);
+const Card = memo(
+  ({
+    id,
+    name,
+    description,
+    image,
+    onClose,
+    onCardClick,
+    isSelected,
+    isActive,
+  }: Props) => {
+    const [isOpenEdit, setIsOpenEdit] = useState(false);
 
-  const editFormRef = useRef<HTMLDivElement>(null);
+    const cardRef = useRef<HTMLDivElement>(null);
 
-  const [deleteUser] = useDeleteUserMutation();
+    const openModalEdit = useCallback(() => {
+      setIsOpenEdit(true);
+    }, [setIsOpenEdit]);
 
-  const handleDelete = useCallback(async () => {
-    try {
-      await deleteUser(id);
-      toast.success("Пользователь успешно удален!", {
-        position: "bottom-right",
-        style: {
-          backgroundColor: "#ECFDF5",
-          padding: "1rem",
-          color: "#065F46",
-          fontFamily: "Roboto Medium",
-        },
-      });
-    } catch (error) {
-      toast.error("Ошибка удаления пользователя!");
-    }
-  }, [id, deleteUser]);
+    const closeModalEdit = useCallback(() => {
+      setIsOpenEdit(false);
+    },[setIsOpenEdit]);
 
-  // const handleEditClick = useCallback((event: any) => {
-  //   event.stopPropagation();
-  //   setShowEditForm(true);
-  // }, []);
+    // const handleOutsideClick = useCallback(
+    //   (e: React.MouseEvent) => {
+    //     if (cardRef.current && !cardRef.current.contains(e.target as Node)) {
+    //       onClose();
+          
+    //     }
+    //   },
+    //   [cardRef, onClose]
+    // );
 
-  // const handleCloseForm = useCallback(() => {
-  //   setShowEditForm(false);
-  // }, []);
+    
 
-  // // const handleInfoClick = useCallback(() => {
-  // //   setShowCartModal(true);
-  // // }, []);
 
-  // const handleInfoClick = useCallback(() => {
-  //   onCardClick(id);
-  // }, [id, onCardClick]);
+    const [deleteUser] = useDeleteUserMutation();
 
-  // useEffect(() => {
-  //   const handleClickOutside = (event: MouseEvent) => {
-  //     if (
-  //       cartModalRef.current &&
-  //       !cartModalRef.current.contains(event.target as Node) &&
-  //       !editFormRef.current?.contains(event.target as Node)
-  //     ) {
-  //       setShowCartModal(false);
-  //     }
-      
-  //   };
+    const handleDelete = useCallback(async () => {
+      try {
+        await deleteUser(id);
+        toast.success("Пользователь успешно удален!", {
+          position: "bottom-right",
+          style: {
+            backgroundColor: "#ECFDF5",
+            padding: "1rem",
+            color: "#065F46",
+            fontFamily: "Roboto Medium",
+          },
+        });
+      } catch (error) {
+        toast.error("Ошибка удаления пользователя!");
+      }
+    }, [id, deleteUser]);
 
-  //   document.addEventListener("mousedown", handleClickOutside);
-  //   return () => {
-  //     document.removeEventListener("mousedown", handleClickOutside);
-  //   };
-  // }, []);
-  
-  const handleEditClick = useCallback((event:any) => {
-    event.stopPropagation();
-    setShowEditForm(true);
-  }, []);
 
-  const handleCloseForm = useCallback(() => {
-    setShowEditForm(false);
-  }, []);
+    return (
+      <section>
+        <div className={classes.card} key={id} ref={cardRef}>
+          <div className={classes.card__content}>
+            <div className={classes.card__image}>
+              <img src={image} alt={name} />
+            </div>
+            <div className={classes.card__info} onClick={() => onCardClick(id)}>
+              <h2 className={classes.card__info__title}>{name}</h2>
+              <p className={classes.card__info__description}>{description}</p>
+            </div>
+            <div className={classes.card__actions}>
+              <button className="pi pi-pencil" onClick={openModalEdit}></button>
+              <button className="pi pi-times" onClick={handleDelete}></button>
+            </div>
+          </div>
 
-  const handleInfoClick = useCallback(() => {
-    onCardClick(id);
-  }, [id, onCardClick]);
+          {isSelected && isActive && (
+            <div className={classes.overlay} onClick={onClose}>
+              <CartModal
+                id={id}
+                name={name}
+                description={description}
+                image={image}
+              />
+            </div>
+          )}
 
-  return (
-    <div className={classes.card} key={id}>
-      <div className={classes.card__content}>
-        <div className={classes.card__image}>
-          <img src={image} alt={name} />
+          {isOpenEdit && (
+            <div className={classes.overlay} onClick={closeModalEdit}>
+              <EditForm
+                id={id}
+                description={description}
+                name={name}
+                image={image}
+                onClose={closeModalEdit}
+              />
+            </div>
+          )}
         </div>
-        <div className={classes.card__info} onClick={handleInfoClick}>
-          <h2 className={classes.card__info__title}>{name}</h2>
-          <p className={classes.card__info__description}>{description}</p>
-        </div>
-        <div className={classes.card__actions}>
-          <button className="pi pi-pencil" onClick={handleEditClick}></button>
-          <button className="pi pi-times" onClick={handleDelete}></button>
-        </div>
-      </div>
-
-      {isActive && (
-        <div ref={editFormRef}>
-          <CartModal
-            id={id}
-            name={name}
-            description={description}
-            image={image}
-          />
-        </div>
-      )}
-
-      {showEditForm && (
-        <div ref={editFormRef}>
-          <EditForm
-            id={id}
-            description={description}
-            name={name}
-            image={image}
-            onClose={handleCloseForm}
-          />
-        </div>
-      )}
-    </div>
-  );
-};
+      </section>
+    );
+  }
+);
 
 export default Card;

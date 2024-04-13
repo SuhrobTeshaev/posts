@@ -1,10 +1,11 @@
-import { useCallback, useEffect } from "react";
+import { memo, useCallback, useEffect } from "react";
 import classes from "./postForm.module.scss";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { FormProps } from "../inretfaces";
 import { useUpdateUserMutation } from "../../futuries/api/apiSlice";
 import { User } from "../../futuries/userSlice/userSlice";
 import toast from "react-hot-toast";
+import { createPortal } from "react-dom";
 interface Props {
   id: number;
   name: string;
@@ -13,7 +14,9 @@ interface Props {
   onClose: () => void;
 }
 
-const EditForm = ({ description, id, image, name, onClose }: Props) => {
+const modalElement = document.getElementById("modal");
+
+const EditForm = memo(({ description, id, image, name, onClose }: Props) => {
   const [updateUser] = useUpdateUserMutation();
 
   const {
@@ -50,18 +53,7 @@ const EditForm = ({ description, id, image, name, onClose }: Props) => {
     [setValue, fileValue]
   );
 
-  // const updateUsersData = useCallback(
-  //   async (userData: User) => {
-  //     await updateUser(userData );
-  //     toast.success("Успешно редактировано!");
-  //     onClose();
-  //   },
-  //   [onClose, toast]
-  // );
-
-//  useEffect(() => {
-//    register("image");
-//  }, [register]);
+ 
 
   const SubmitHandler: SubmitHandler<User> = (body: Partial<User>) => {
     handleImageChange
@@ -82,11 +74,10 @@ const EditForm = ({ description, id, image, name, onClose }: Props) => {
     });
   };
 
-  //   const onSubmit:SubmitHandler<FormProps> = (data) => {
-  // updateUsersData(d)
-  //   }
+  
 
-  return (
+  return modalElement
+    ? createPortal (
     <form onSubmit={handleSubmit(SubmitHandler)} className={classes.form}>
       <div className={classes.form__content}>
         <div className={classes.form__header}>
@@ -137,8 +128,11 @@ const EditForm = ({ description, id, image, name, onClose }: Props) => {
           Save Changes
         </button>
       </div>
-    </form>
-  );
-};
+    </form>,
+        modalElement
+      )
+    : null;
+  
+});
 
 export default EditForm;

@@ -25,14 +25,14 @@
 .form__input {
     @apply flex flex-col gap-4;
     input {
-        @apply w-full opacity-60 rounded-lg outline-none text-gray-900 indent-5 order-1 py-3 px-6;
+        @apply w-full opacity-60 rounded-lg outline-none text-gray-900 indent-0 order-1 py-3 px-3;
     }
 }
 
 .form__textarea {
     @apply flex flex-col gap-4;
     textarea {
-        @apply w-full opacity-60 rounded-lg outline-none text-gray-900 indent-5 order-1 py-3 px-3 box-border resize-y;
+        @apply w-full opacity-60 rounded-lg outline-none text-gray-900 indent-0 order-1 py-3 px-3 box-border resize-y;
     }
 }
 

@@ -2,17 +2,26 @@ import { configureStore } from '@reduxjs/toolkit'
 
 
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
-// import userSlice from './userSlice/userSlice';
-import { userApi } from './api/apiSlice';
+
 import { setupListeners } from '@reduxjs/toolkit/query';
+import { userApi } from './userSlice/authSlice';
+import { postApi } from './api/apiSlice';
 
 export const store = configureStore({
 
   reducer: {
-    // users: userSlice,
-     [userApi.reducerPath]: userApi.reducer,
+     [postApi.reducerPath]: postApi.reducer,
+     [userApi.reducerPath]:userApi.reducer
      },
-    middleware: (getDefaultMiddleWare) => getDefaultMiddleWare().concat(userApi.middleware),
+    middleware: (getDefaultMiddleWare) => 
+    getDefaultMiddleWare()
+    
+    .concat(postApi.middleware)
+    .concat(userApi.middleware),
+    
+      
+      
+
     devTools:true
   
 })

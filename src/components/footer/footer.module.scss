@@ -1,6 +1,6 @@
 .footer {
 
-    @apply relative  w-full px-4 py-6 mx-auto bottom-0  text-white bg-neutral-600 ;
+    @apply absolute   w-full px-4 py-6 mx-auto bottom-0  text-white bg-neutral-600 ;
 
     .footer__content {
         @apply flex justify-between row-span-1 gap-40 mx-3 my-auto ;

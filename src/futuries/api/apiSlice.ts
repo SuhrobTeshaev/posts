@@ -5,6 +5,7 @@ export interface User {
   image: string;
   description: string;
   name: string;
+  data:[]
 
   
 }
@@ -13,18 +14,18 @@ const baseQuery = fetchBaseQuery({
   baseUrl: 'http://localhost:3001/',
 });
 
-export const userApi = createApi({
-  reducerPath: "userApi",
+export const postApi = createApi({
+  reducerPath: "postApi",
   baseQuery: baseQuery,
   tagTypes: ["User"],
   endpoints: (builder) => ({
-    getUsers: builder.query<User, void>({
-      query: () => "users",
+    getUsers: builder.query<User[],void>({
+      query: () => "posts",
       providesTags: ["User"],
     }),
     createUser: builder.mutation<User, Partial<User>>({
       query: (userData) => ({
-        url: "users",
+        url: "posts",
         method: "POST",
         body: userData,
       }),
@@ -32,7 +33,7 @@ export const userApi = createApi({
     }),
     updateUser: builder.mutation<void, { id: number; body: Partial<User> }>({
       query: ({ id, body }) => ({
-        url: `users/${id}`,
+        url: `posts/${id}`,
         method: "PUT",
         body: body,
       }),
@@ -40,7 +41,7 @@ export const userApi = createApi({
     }),
     deleteUser: builder.mutation<{ success: boolean; id: number }, number>({
       query: (id) => ({
-        url: `users/${id}`,
+        url: `posts/${id}`,
         method: "DELETE",
       }),
       invalidatesTags: ["User"],
@@ -53,4 +54,4 @@ export const {
   useCreateUserMutation,
   useUpdateUserMutation,
   useDeleteUserMutation,
-} = userApi;
+} = postApi;

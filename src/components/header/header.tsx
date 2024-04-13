@@ -1,5 +1,6 @@
 import classes from "./header.module.scss";
 import logo from './../../../public/img/icons8-xmpp.svg'
+import BtnDarkMode from "./../../shared/BtnDarkMode/btnDark";
 
 const Header = () => {
  
@@ -30,10 +31,10 @@ const Header = () => {
             </li>
           </ul>
         </nav>
-        <div className={classes.header__login}>
+        {/* <div className={classes.header__login}>
           <span className="pi pi-user"></span>
-        </div>
-        
+        </div> */}
+        <BtnDarkMode />
       </div>
     </header>
   );

@@ -1,5 +1,10 @@
+
+.overlay {
+    @apply fixed top-0 left-0 w-full h-full z-30   ;
+}
+
 .main {
-    @apply sm:md:xl:lg:2xl:w-full flex h-screen flex-col py-4 px-3 overflow-y-scroll;
+    @apply w-full flex h-[75vh]  flex-col py-4 px-3 overflow-y-auto ;
 
     .main__header {
         @apply flex flex-row justify-between ;
@@ -9,13 +14,14 @@
         }
     }
     .main__search {
-        @apply  mx-60 flex  flex-row py-4 gap-4 cursor-pointer;
+        @apply  mx-52 flex  flex-row py-4 gap-2 cursor-pointer;
 
         input {
-            @apply w-96 h-10 rounded-2xl opacity-60 outline-none text-gray-900 indent-5 order-1;
+            @apply w-96 h-10 rounded-2xl opacity-60 outline-none text-gray-900 indent-5 order-1 invert-0;
         }
+        
         span {
-            @apply w-12 my-3 -mx-12 bg-opacity-100 order-2 ;
+            @apply w-12 my-3 mr-16  bg-opacity-100 order-2 ;
         }
 
         
@@ -24,3 +30,10 @@
 }
 
 
+.input-light {
+    @apply bg-gray-200 text-gray-900; /* Светлый фон и темный текст */
+}
+
+.input-dark {
+    @apply bg-gray-700 text-gray-100; /* Темный фон и светлый текст */
+}
